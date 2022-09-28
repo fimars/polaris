@@ -16,6 +16,7 @@ import {EmptySearchResult} from '../EmptySearchResult';
 // eslint-disable-next-line import/no-deprecated
 import {EventListener} from '../EventListener';
 import {Icon} from '../Icon';
+import {SelectAllActions} from '../SelectAllActions';
 import {Stack} from '../Stack';
 import {Sticky} from '../Sticky';
 import {Spinner} from '../Spinner';
@@ -532,6 +533,25 @@ function IndexTableBase({
   const shouldShowBulkActions =
     (bulkActionsSelectable && selectedItemsCount) || isSmallScreenSelectable;
 
+  const bulkActionClassNames = classNames(styles.BulkActionsWrapper);
+
+  const shouldShowActions = !condensed || selectedItemsCount;
+  const promotedActions = shouldShowActions ? promotedBulkActions : [];
+  const actions = shouldShowActions ? bulkActions : [];
+
+  const bulkActionsMarkup = shouldShowBulkActions ? (
+    <div className={bulkActionClassNames} data-condensed={condensed}>
+      {loadingMarkup}
+
+      <BulkActions
+        selectMode={selectMode || isSmallScreenSelectable}
+        promotedActions={promotedActions}
+        actions={actions}
+        onSelectModeToggle={condensed ? handleSelectModeToggle : undefined}
+      />
+    </div>
+  ) : null;
+
   const stickyHeaderMarkup = (
     <div className={stickyTableClassNames} role="presentation">
       <Sticky boundingElement={stickyWrapper}>
@@ -541,35 +561,25 @@ function IndexTableBase({
             isSticky && styles['StickyTableHeader-isSticky'],
           );
 
-          const bulkActionClassNames = classNames(
-            styles.BulkActionsWrapper,
+          const selectAllActionsClassName = classNames(
+            styles.SelectAllActionsWrapper,
             condensed && styles['StickyTableHeader-condensed'],
             isSticky && styles['StickyTableHeader-isSticky'],
           );
 
-          const shouldShowActions = !condensed || selectedItemsCount;
-          const promotedActions = shouldShowActions ? promotedBulkActions : [];
-          const actions = shouldShowActions ? bulkActions : [];
-
-          const bulkActionsMarkup = shouldShowBulkActions ? (
-            <div className={bulkActionClassNames} data-condensed={condensed}>
-              {loadingMarkup}
-              <BulkActions
-                smallScreen={smallScreen}
+          const selectAllActionsMarkup = shouldShowBulkActions ? (
+            <div className={selectAllActionsClassName}>
+              <SelectAllActions
                 label={i18n.translate('Polaris.IndexTable.selected', {
                   selectedItemsCount: selectedItemsCountLabel,
                 })}
+                smallScreen={smallScreen}
                 accessibilityLabel={bulkActionsAccessibilityLabel}
                 selected={bulkSelectState}
                 selectMode={selectMode || isSmallScreenSelectable}
                 onToggleAll={handleTogglePage}
-                promotedActions={promotedActions}
-                actions={actions}
                 paginatedSelectAllText={paginatedSelectAllText}
                 paginatedSelectAllAction={paginatedSelectAllAction}
-                onSelectModeToggle={
-                  condensed ? handleSelectModeToggle : undefined
-                }
               />
             </div>
           ) : null;
@@ -617,9 +627,7 @@ function IndexTableBase({
             </div>
           );
 
-          const stickyContent = bulkActionsMarkup
-            ? bulkActionsMarkup
-            : headerMarkup;
+          const stickyContent = selectAllActionsMarkup ?? headerMarkup;
 
           return stickyContent;
         }}
@@ -722,11 +730,20 @@ function IndexTableBase({
       <div className={styles.EmptySearchResultWrapper}>{emptyStateMarkup}</div>
     );
 
+  const bulkActionsWrapperClassNames = classNames(
+    Boolean(bulkActionsMarkup) &&
+      selectMode &&
+      styles.IndexTableWithBulkActions,
+  );
+
   return (
     <>
       <div className={styles.IndexTable}>
-        {!shouldShowBulkActions && !condensed && loadingMarkup}
-        {tableContentMarkup}
+        <div className={bulkActionsWrapperClassNames}>
+          {!shouldShowBulkActions && !condensed && loadingMarkup}
+          {tableContentMarkup}
+          {bulkActionsMarkup}
+        </div>
       </div>
       {scrollBarMarkup}
     </>
