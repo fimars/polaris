@@ -302,8 +302,8 @@ function IndexTableBase({
   }, [handleCanScrollRight]);
 
   const handleIsSmallScreen = useCallback(() => {
-    setSmallScreen(smallScreen);
-  }, [smallScreen]);
+    setSmallScreen(isBreakpointsXS());
+  }, []);
 
   const [canFitStickyColumn, setCanFitStickyColumn] = useState(true);
 
