@@ -1,5 +1,7 @@
 # @shopify/plugin-polaris
 
+## 0.0.17
+
 ## 0.0.16
 
 ### Patch Changes

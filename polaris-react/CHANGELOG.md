@@ -1,5 +1,15 @@
 # Changelog
 
+## 10.12.0
+
+### Minor Changes
+
+- [#7588](https://github.com/Shopify/polaris/pull/7588) [`c1c8f73b0`](https://github.com/Shopify/polaris/commit/c1c8f73b0f0bc7ab1e2be1ad824a3aa2dded3326) Thanks [@rcaplanshopify](https://github.com/rcaplanshopify)! - Added optional `captureOverscroll` prop to `Popover`
+
+### Patch Changes
+
+- [#7578](https://github.com/Shopify/polaris/pull/7578) [`217f2f8ed`](https://github.com/Shopify/polaris/commit/217f2f8edd6e0c8ced5d697739efd48a5fb78fb1) Thanks [@haskelash-shopify](https://github.com/haskelash-shopify)! - Hide bulk actions popup when all items are deselected.
+
 ## 10.11.0
 
 ### Minor Changes

@@ -1,5 +1,18 @@
 # polaris.shopify.com
 
+## 0.25.0
+
+### Minor Changes
+
+- [#7661](https://github.com/Shopify/polaris/pull/7661) [`e1a3c62d2`](https://github.com/Shopify/polaris/commit/e1a3c62d23d164462801c36f28164689534439ef) Thanks [@jjgali](https://github.com/jjgali)! - Added keywords to Naming page.
+
+### Patch Changes
+
+- [#7569](https://github.com/Shopify/polaris/pull/7569) [`ffe1e9230`](https://github.com/Shopify/polaris/commit/ffe1e923092df65906ed7aeb0944bdfb8cb2375b) Thanks [@chazdean](https://github.com/chazdean)! - Updated `Tiles` component guidance and examples
+
+- Updated dependencies [[`217f2f8ed`](https://github.com/Shopify/polaris/commit/217f2f8edd6e0c8ced5d697739efd48a5fb78fb1), [`c1c8f73b0`](https://github.com/Shopify/polaris/commit/c1c8f73b0f0bc7ab1e2be1ad824a3aa2dded3326)]:
+  - @shopify/polaris@10.12.0
+
 ## 0.24.0
 
 ### Minor Changes
